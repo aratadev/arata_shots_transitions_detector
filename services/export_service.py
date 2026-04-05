@@ -1,6 +1,5 @@
 from __future__ import annotations
 
-import json
 from pathlib import Path
 
 from ..utils.comfy_paths import get_output_directory
@@ -43,21 +42,7 @@ class ShotTextExportService:
 
     def _format_shot_file(self, shot_boundaries: ShotBoundaryResult) -> str:
         lines = [
-            "# format_version=1",
-            f"# detector={shot_boundaries.detector}",
-            f"# source_video_path={shot_boundaries.video.source_video_path}",
-            f"# fps={self._format_optional_float(shot_boundaries.video.fps)}",
-            f"# parameters_json={json.dumps(shot_boundaries.parameters, sort_keys=True)}",
-            "# columns: shot_index\tstart_frame\tend_frame\tstart_sec\tend_sec",
-            "# frame_semantics: start_frame inclusive, end_frame exclusive",
-        ]
-        lines.extend(
             f"{shot.index}\t{shot.start_frame}\t{shot.end_frame}\t{shot.start_sec:.6f}\t{shot.end_sec:.6f}"
             for shot in shot_boundaries.shots
-        )
-        return "\n".join(lines) + "\n"
-
-    def _format_optional_float(self, value: float | None) -> str:
-        if value is None:
-            return "unknown"
-        return f"{float(value):.6f}"
+        ]
+        return "\n".join(lines) + ("\n" if lines else "")
