@@ -1,19 +1,9 @@
-from .models import (
-    BoundaryTextExportResult,
-    ExportedFile,
-    ShotBoundary,
-    ShotBoundaryResult,
-    TransitionBoundary,
-    TransitionBoundaryResult,
-    VideoMetadata,
-)
+from .models import ExportedFile, ShotBoundary, ShotBoundaryResult, ShotTextExportResult, VideoMetadata
 
 __all__ = [
-    "BoundaryTextExportResult",
     "ExportedFile",
     "ShotBoundary",
     "ShotBoundaryResult",
-    "TransitionBoundary",
-    "TransitionBoundaryResult",
+    "ShotTextExportResult",
     "VideoMetadata",
 ]

@@ -12,25 +12,23 @@ def probe_video_metadata(video_path: str) -> VideoMetadata:
         raise ValueError(f"Video path not found: {video_path}")
 
     try:
-        from scenedetect import open_video
+        import cv2
     except Exception as exc:
         raise RuntimeError(
-            "Video metadata probing requires PySceneDetect. Install `scenedetect[opencv]`."
+            "Video metadata probing requires OpenCV. Install `opencv-python-headless`."
         ) from exc
 
-    video = open_video(str(resolved_path))
+    capture = cv2.VideoCapture(str(resolved_path))
     try:
-        fps = _coerce_positive_float(getattr(video, "frame_rate", None) or getattr(video, "fps", None))
-        duration = getattr(video, "duration", None)
-        total_frames = _coerce_int(getattr(duration, "frame_num", None)) if duration is not None else None
+        if not capture.isOpened():
+            raise RuntimeError(f"Unable to open video for metadata probing: {resolved_path}")
+
+        fps = _coerce_positive_float(capture.get(cv2.CAP_PROP_FPS))
+        total_frames = _coerce_int(capture.get(cv2.CAP_PROP_FRAME_COUNT))
         duration_sec = None
-        if duration is not None and hasattr(duration, "get_seconds"):
-            try:
-                duration_sec = float(duration.get_seconds())
-            except Exception:
-                duration_sec = None
-        if duration_sec is None and fps and total_frames:
+        if fps and total_frames:
             duration_sec = float(total_frames) / float(fps)
+
         return VideoMetadata(
             source_video_path=str(resolved_path),
             fps=fps,
@@ -38,13 +36,7 @@ def probe_video_metadata(video_path: str) -> VideoMetadata:
             duration_sec=duration_sec,
         )
     finally:
-        for method_name in ("close", "release"):
-            method = getattr(video, method_name, None)
-            if callable(method):
-                try:
-                    method()
-                except Exception:
-                    pass
+        capture.release()
 
 
 def _coerce_positive_float(value: Any) -> float | None:
@@ -59,6 +51,9 @@ def _coerce_positive_float(value: Any) -> float | None:
 
 def _coerce_int(value: Any) -> int | None:
     try:
-        return int(value)
+        number = int(value)
     except (TypeError, ValueError):
         return None
+    if number <= 0:
+        return None
+    return number

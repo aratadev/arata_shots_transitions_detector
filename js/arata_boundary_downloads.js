@@ -1,6 +1,6 @@
 import { app } from "../../scripts/app.js";
 
-const TARGET_CLASS = "ArataBoundaryTxtExport";
+const TARGET_CLASS = "ArataShotTxtExport";
 
 function triggerDownload(fileInfo) {
     if (!fileInfo?.relative_output_path) {
@@ -9,7 +9,7 @@ function triggerDownload(fileInfo) {
 
     const anchor = document.createElement("a");
     anchor.href = `/arata-transnetv2/download?path=${encodeURIComponent(fileInfo.relative_output_path)}`;
-    anchor.download = fileInfo.filename || "boundaries.txt";
+    anchor.download = fileInfo.filename || "shots.txt";
     anchor.target = "_blank";
     anchor.rel = "noopener noreferrer";
     document.body.appendChild(anchor);
@@ -38,15 +38,10 @@ app.registerExtension({
                 triggerDownload(fileInfo);
             });
 
-            this._arataTransitionsButton = this.addWidget("button", "Download transitions TXT", null, () => {
-                const fileInfo = this._arataBoundaryFiles.find((item) => item.label === "transitions");
-                triggerDownload(fileInfo);
-            });
-
             this._arataStatusWidget = this.addWidget(
                 "text",
                 "export_status",
-                "Run the node to generate download links.",
+                "Run the node to generate the shots TXT file.",
                 () => {}
             );
             this.size = [Math.max(this.size[0], 340), this.size[1]];
@@ -65,15 +60,12 @@ app.registerExtension({
             this._arataBoundaryFiles = files;
 
             const shotsFile = files.find((item) => item.label === "shots");
-            const transitionsFile = files.find((item) => item.label === "transitions");
-
             updateButton(this._arataShotsButton, shotsFile, "Download shots TXT");
-            updateButton(this._arataTransitionsButton, transitionsFile, "Download transitions TXT");
 
             if (this._arataStatusWidget) {
-                this._arataStatusWidget.value = files.length
-                    ? `Ready: ${files.map((item) => item.filename).join(", ")}`
-                    : "No files were exported.";
+                this._arataStatusWidget.value = shotsFile
+                    ? `Ready: ${shotsFile.filename}`
+                    : "No shots file was exported.";
             }
             this.setDirtyCanvas(true, true);
         };

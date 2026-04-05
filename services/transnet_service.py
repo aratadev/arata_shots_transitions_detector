@@ -30,7 +30,7 @@ class TransNetV2ShotDetectionService:
         if fps is None or fps <= 0:
             raise RuntimeError(
                 "Unable to determine FPS for TransNetV2 results. "
-                "Ensure the video is readable and PySceneDetect is installed with a video backend."
+                "Ensure the video is readable and OpenCV can probe its metadata."
             )
 
         merged_scenes = self._apply_min_scene_length(raw_scenes, fps, min_scene_length_frames)
