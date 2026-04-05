@@ -8,7 +8,7 @@ NODE_CLASS_MAPPINGS = {
 
 NODE_DISPLAY_NAME_MAPPINGS = {
     "ArataTransNetV2ShotDetect": "Arata Detect Shots (TransNetV2)",
-    "ArataShotTxtExport": "Arata Export Shots TXT",
+    "ArataShotTxtExport": "Arata Export Shots JSON",
 }
 
 __all__ = ["NODE_CLASS_MAPPINGS", "NODE_DISPLAY_NAME_MAPPINGS"]

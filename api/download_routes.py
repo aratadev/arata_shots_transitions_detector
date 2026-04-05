@@ -39,7 +39,12 @@ def register_download_routes() -> None:
 
         response = web.FileResponse(path=file_path)
         quoted_name = quote(file_path.name)
-        response.headers["Content-Type"] = "text/plain; charset=utf-8"
+        content_type = (
+            "application/json; charset=utf-8"
+            if file_path.suffix.lower() == ".json"
+            else "text/plain; charset=utf-8"
+        )
+        response.headers["Content-Type"] = content_type
         response.headers["Content-Disposition"] = (
             f"attachment; filename=\"{file_path.name}\"; filename*=UTF-8''{quoted_name}"
         )

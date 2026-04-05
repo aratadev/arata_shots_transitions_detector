@@ -1,28 +1,35 @@
 # Arata TransNetV2 Node
 
-ComfyUI custom nodes for exporting a shot-boundary text file from a video.
+ComfyUI custom nodes for exporting a shot-boundary JSON file from a video.
 
 ## Nodes
 
 - `Arata Detect Shots (TransNetV2)`
-- `Arata Export Shots TXT`
+- `Arata Export Shots JSON`
 
 ## Workflow Shape
 
 1. Feed `video_path` into `Arata Detect Shots (TransNetV2)`.
-2. Connect its output into `Arata Export Shots TXT`.
+2. Connect its output into `Arata Export Shots JSON`.
 3. Run the workflow.
-4. Use the download button on the export node to fetch the generated `.txt` file.
+4. Use the download button on the export node to fetch the generated `.json` file.
 
 ## Output Format
 
-Shot file columns:
-
-```text
-shot_index\tstart_frame\tend_frame\tstart_sec\tend_sec
+```json
+{
+  "shots": [
+    {
+      "index": 1,
+      "start_frame": 0,
+      "end_frame": 124,
+      "start_sec": 0.0,
+      "end_sec": 5.166667
+    }
+  ]
+}
 ```
 
-The file begins with `#` metadata lines.
 Frame semantics are:
 
 - `start_frame`: inclusive

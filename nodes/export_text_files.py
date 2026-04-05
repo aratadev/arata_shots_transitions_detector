@@ -8,7 +8,7 @@ class ArataShotTxtExport:
     FUNCTION = "export_file"
     OUTPUT_NODE = True
     RETURN_TYPES = ("STRING",)
-    RETURN_NAMES = ("shots_txt_path",)
+    RETURN_NAMES = ("shots_json_path",)
 
     @classmethod
     def INPUT_TYPES(cls):

@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import json
 from pathlib import Path
 
 from ..utils.comfy_paths import get_output_directory
@@ -24,7 +25,7 @@ class ShotTextExportService:
         export_dir = ensure_directory(output_root / normalize_output_subdirectory(output_subdirectory))
         stem = build_output_filename_stem(shot_boundaries.video.source_video_path, filename_stem)
 
-        shots_path = make_unique_path(export_dir / f"{stem}_shots.txt", overwrite_existing)
+        shots_path = make_unique_path(export_dir / f"{stem}_shots.json", overwrite_existing)
         shots_path.write_text(self._format_shot_file(shot_boundaries), encoding="utf-8")
 
         return ShotTextExportResult(
@@ -41,8 +42,16 @@ class ShotTextExportService:
         )
 
     def _format_shot_file(self, shot_boundaries: ShotBoundaryResult) -> str:
-        lines = [
-            f"{shot.index}\t{shot.start_frame}\t{shot.end_frame}\t{shot.start_sec:.6f}\t{shot.end_sec:.6f}"
-            for shot in shot_boundaries.shots
-        ]
-        return "\n".join(lines) + ("\n" if lines else "")
+        payload = {
+            "shots": [
+                {
+                    "index": shot.index,
+                    "start_frame": shot.start_frame,
+                    "end_frame": shot.end_frame,
+                    "start_sec": shot.start_sec,
+                    "end_sec": shot.end_sec,
+                }
+                for shot in shot_boundaries.shots
+            ]
+        }
+        return json.dumps(payload, ensure_ascii=False, indent=2) + "\n"

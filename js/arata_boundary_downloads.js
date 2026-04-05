@@ -33,7 +33,7 @@ app.registerExtension({
             const result = onNodeCreated?.apply(this, arguments);
             this._arataBoundaryFiles = [];
 
-            this._arataShotsButton = this.addWidget("button", "Download shots TXT", null, () => {
+            this._arataShotsButton = this.addWidget("button", "Download shots JSON", null, () => {
                 const fileInfo = this._arataBoundaryFiles.find((item) => item.label === "shots");
                 triggerDownload(fileInfo);
             });
@@ -41,7 +41,7 @@ app.registerExtension({
             this._arataStatusWidget = this.addWidget(
                 "text",
                 "export_status",
-                "Run the node to generate the shots TXT file.",
+                "Run the node to generate the shots JSON file.",
                 () => {}
             );
             this.size = [Math.max(this.size[0], 340), this.size[1]];
@@ -60,7 +60,7 @@ app.registerExtension({
             this._arataBoundaryFiles = files;
 
             const shotsFile = files.find((item) => item.label === "shots");
-            updateButton(this._arataShotsButton, shotsFile, "Download shots TXT");
+            updateButton(this._arataShotsButton, shotsFile, "Download shots JSON");
 
             if (this._arataStatusWidget) {
                 this._arataStatusWidget.value = shotsFile
