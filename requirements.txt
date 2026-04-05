@@ -1,0 +1,2 @@
+transnetv2-pytorch>=1.0.2
+scenedetect[opencv]>=0.6.7
