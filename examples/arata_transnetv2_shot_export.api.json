@@ -1,0 +1,29 @@
+{
+  "1": {
+    "inputs": {
+      "video_path": "/absolute/path/to/video.mp4",
+      "threshold": 0.5,
+      "min_scene_length_frames": 30,
+      "device": "auto"
+    },
+    "class_type": "ArataTransNetV2ShotDetect",
+    "_meta": {
+      "title": "Arata Detect Shots (TransNetV2)"
+    }
+  },
+  "2": {
+    "inputs": {
+      "shot_boundaries": [
+        "1",
+        0
+      ],
+      "output_subdirectory": "arata_transnetv2",
+      "filename_stem": "",
+      "overwrite_existing": false
+    },
+    "class_type": "ArataShotTxtExport",
+    "_meta": {
+      "title": "Arata Export Shots JSON"
+    }
+  }
+}
