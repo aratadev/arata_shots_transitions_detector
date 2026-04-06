@@ -43,6 +43,15 @@ class ShotTextExportService:
 
     def _format_shot_file(self, shot_boundaries: ShotBoundaryResult) -> str:
         payload = {
+            "video": {
+                "fps": shot_boundaries.video.fps,
+                "total_frames": shot_boundaries.video.total_frames,
+                "duration_sec": shot_boundaries.video.duration_sec,
+            },
+            "frame_semantics": {
+                "start_frame": "inclusive",
+                "end_frame": "exclusive",
+            },
             "shots": [
                 {
                     "index": shot.index,

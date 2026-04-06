@@ -18,6 +18,15 @@ ComfyUI custom nodes for exporting a shot-boundary JSON file from a video.
 
 ```json
 {
+  "video": {
+    "fps": 24.0,
+    "total_frames": 2400,
+    "duration_sec": 100.0
+  },
+  "frame_semantics": {
+    "start_frame": "inclusive",
+    "end_frame": "exclusive"
+  },
   "shots": [
     {
       "index": 1,
@@ -29,8 +38,3 @@ ComfyUI custom nodes for exporting a shot-boundary JSON file from a video.
   ]
 }
 ```
-
-Frame semantics are:
-
-- `start_frame`: inclusive
-- `end_frame`: exclusive
