@@ -1,9 +1,9 @@
-from .models import ExportedFile, ShotBoundary, ShotBoundaryResult, ShotTextExportResult, VideoMetadata
+from .models import ExportedFile, ShotBoundary, ShotBoundaryResult, ShotJsonExportResult, VideoMetadata
 
 __all__ = [
     "ExportedFile",
     "ShotBoundary",
     "ShotBoundaryResult",
-    "ShotTextExportResult",
+    "ShotJsonExportResult",
     "VideoMetadata",
 ]

@@ -21,7 +21,7 @@
       "filename_stem": "",
       "overwrite_existing": false
     },
-    "class_type": "ArataShotTxtExport",
+    "class_type": "ArataShotJsonExport",
     "_meta": {
       "title": "Arata Export Shots JSON"
     }

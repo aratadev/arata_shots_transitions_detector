@@ -4,7 +4,7 @@
   "nodes": [
     {
       "id": 1,
-      "type": "Arata Detect Shots (TransNetV2)",
+      "type": "ArataTransNetV2ShotDetect",
       "pos": [
         80,
         120
@@ -27,7 +27,7 @@
         }
       ],
       "properties": {
-        "Node name for S&R": "Arata Detect Shots (TransNetV2)"
+        "Node name for S&R": "ArataTransNetV2ShotDetect"
       },
       "widgets_values": [
         "/absolute/path/to/video.mp4",
@@ -38,7 +38,7 @@
     },
     {
       "id": 2,
-      "type": "Arata Export Shots JSON",
+      "type": "ArataShotJsonExport",
       "pos": [
         500,
         120
@@ -58,7 +58,7 @@
         }
       ],
       "properties": {
-        "Node name for S&R": "Arata Export Shots JSON"
+        "Node name for S&R": "ArataShotJsonExport"
       },
       "widgets_values": [
         "arata_transnetv2",

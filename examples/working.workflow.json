@@ -1,0 +1,109 @@
+{
+  "id": "dc341e89-da84-4d75-9c39-8074b646d68f",
+  "revision": 0,
+  "last_node_id": 2,
+  "last_link_id": 1,
+  "nodes": [
+    {
+      "id": 2,
+      "type": "ArataShotJsonExport",
+      "pos": [
+        784.375,
+        2.73046875
+      ],
+      "size": [
+        340,
+        154
+      ],
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "shot_boundaries",
+          "type": "ARATA_SHOT_BOUNDARIES",
+          "link": 1
+        }
+      ],
+      "outputs": [
+        {
+          "name": "shots_json_path",
+          "type": "STRING",
+          "links": null
+        }
+      ],
+      "properties": {
+        "aux_id": "aratadev/arata_shots_transitions_detector",
+        "ver": "4f457711362d5f883435c9c39ae0a16b1601b156",
+        "Node name for S&R": "ArataShotJsonExport"
+      },
+      "widgets_values": [
+        "arata_transnetv2",
+        "",
+        false,
+        null,
+        "Run the node to generate the shots JSON file."
+      ]
+    },
+    {
+      "id": 1,
+      "type": "ArataTransNetV2ShotDetect",
+      "pos": [
+        342.61103515624995,
+        -49.82421875
+      ],
+      "size": [
+        316.5513671875,
+        130
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "shot_boundaries",
+          "type": "ARATA_SHOT_BOUNDARIES",
+          "links": [
+            1
+          ]
+        }
+      ],
+      "properties": {
+        "aux_id": "aratadev/arata_shots_transitions_detector",
+        "ver": "4f457711362d5f883435c9c39ae0a16b1601b156",
+        "Node name for S&R": "ArataTransNetV2ShotDetect"
+      },
+      "widgets_values": [
+        "",
+        0.5,
+        30,
+        "auto"
+      ]
+    }
+  ],
+  "links": [
+    [
+      1,
+      1,
+      0,
+      2,
+      0,
+      "ARATA_SHOT_BOUNDARIES"
+    ]
+  ],
+  "groups": [],
+  "config": {},
+  "extra": {
+    "workflowRendererVersion": "LG",
+    "ds": {
+      "scale": 1,
+      "offset": [
+        98.6953125,
+        255.4140625
+      ]
+    },
+    "frontendVersion": "1.41.20"
+  },
+  "version": 0.4
+}

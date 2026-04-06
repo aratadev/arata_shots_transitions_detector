@@ -4,7 +4,7 @@ import json
 from pathlib import Path
 
 from ..utils.comfy_paths import get_output_directory
-from ..utils.models import ExportedFile, ShotBoundaryResult, ShotTextExportResult
+from ..utils.models import ExportedFile, ShotBoundaryResult, ShotJsonExportResult
 from ..utils.path_utils import (
     build_output_filename_stem,
     ensure_directory,
@@ -13,14 +13,14 @@ from ..utils.path_utils import (
 )
 
 
-class ShotTextExportService:
+class ShotJsonExportService:
     def export(
         self,
         shot_boundaries: ShotBoundaryResult,
         output_subdirectory: str,
         filename_stem: str,
         overwrite_existing: bool,
-    ) -> ShotTextExportResult:
+    ) -> ShotJsonExportResult:
         output_root = get_output_directory()
         export_dir = ensure_directory(output_root / normalize_output_subdirectory(output_subdirectory))
         stem = build_output_filename_stem(shot_boundaries.video.source_video_path, filename_stem)
@@ -28,7 +28,7 @@ class ShotTextExportService:
         shots_path = make_unique_path(export_dir / f"{stem}_shots.json", overwrite_existing)
         shots_path.write_text(self._format_shot_file(shot_boundaries), encoding="utf-8")
 
-        return ShotTextExportResult(
+        return ShotJsonExportResult(
             shots_file=self._build_exported_file("shots", shots_path, output_root),
         )
 

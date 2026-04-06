@@ -47,5 +47,5 @@ class ExportedFile:
 
 
 @dataclass(frozen=True)
-class ShotTextExportResult:
+class ShotJsonExportResult:
     shots_file: ExportedFile

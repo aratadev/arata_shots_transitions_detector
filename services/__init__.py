@@ -1,7 +1,7 @@
-from .export_service import ShotTextExportService
+from .export_service import ShotJsonExportService
 from .transnet_service import TransNetV2ShotDetectionService
 
 __all__ = [
-    "ShotTextExportService",
+    "ShotJsonExportService",
     "TransNetV2ShotDetectionService",
 ]

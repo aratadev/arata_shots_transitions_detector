@@ -1,9 +1,9 @@
 from __future__ import annotations
 
-from ..services.export_service import ShotTextExportService
+from ..services.export_service import ShotJsonExportService
 
 
-class ArataShotTxtExport:
+class ArataShotJsonExport:
     CATEGORY = "Arata/Video Analysis"
     FUNCTION = "export_file"
     OUTPUT_NODE = True
@@ -28,7 +28,7 @@ class ArataShotTxtExport:
         filename_stem: str,
         overwrite_existing: bool,
     ):
-        service = ShotTextExportService()
+        service = ShotJsonExportService()
         export_result = service.export(
             shot_boundaries=shot_boundaries,
             output_subdirectory=output_subdirectory,

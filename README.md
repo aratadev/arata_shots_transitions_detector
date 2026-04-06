@@ -14,6 +14,11 @@ ComfyUI custom nodes for exporting a shot-boundary JSON file from a video.
 3. Run the workflow.
 4. Use the download button on the export node to fetch the generated `.json` file.
 
+## Migration Note
+
+The export node internal id is now `ArataShotJsonExport`.
+Older saved workflows that reference the previous export node id must be updated before they will load correctly.
+
 ## Output Format
 
 ```json

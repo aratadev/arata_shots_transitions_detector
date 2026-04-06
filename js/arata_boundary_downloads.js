@@ -1,6 +1,6 @@
 import { app } from "../../scripts/app.js";
 
-const TARGET_CLASS = "ArataShotTxtExport";
+const TARGET_CLASS = "ArataShotJsonExport";
 
 function triggerDownload(fileInfo) {
     if (!fileInfo?.relative_output_path) {
@@ -9,7 +9,7 @@ function triggerDownload(fileInfo) {
 
     const anchor = document.createElement("a");
     anchor.href = `/arata-transnetv2/download?path=${encodeURIComponent(fileInfo.relative_output_path)}`;
-    anchor.download = fileInfo.filename || "shots.txt";
+    anchor.download = fileInfo.filename || "shots.json";
     anchor.target = "_blank";
     anchor.rel = "noopener noreferrer";
     document.body.appendChild(anchor);
